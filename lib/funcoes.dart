@@ -1,6 +1,6 @@
 import 'dart:io';
 
-String inputoutput({required mensagem}) {
+String input({required mensagem}) {
   String? input;
   while (input == null) {
     print(mensagem);
@@ -9,48 +9,93 @@ String inputoutput({required mensagem}) {
   return input;
 }
 
-String pedra({required pl2}) {
-  if (pl2 == "papel") {
+class Player1 {
+  String nome;
+  String escolha;
+
+  Player1({required this.nome, required this.escolha});
+
+  String verificar() {
+    if (escolha == "pedra" || escolha == "papel" || escolha == "tesoura") {
+      return escolha;
+    } else {
+      return "não entendi";
+    }
+  }
+}
+
+class Player2 extends Player1 {
+  Player2({required nome, required escolha})
+      : super(nome: nome, escolha: escolha);
+}
+
+String pedra({required op1}) {
+  if (op1 == "papel") {
     return "papel";
-  } else if (pl2 == "tesoura") {
-    return "pedra";
-  } else {
-    return "empate";
   }
+  if (op1 == "tesoura") {
+    return "pedra";
+  }
+  if (op1 == "pedra") {
+    return "empate";
+  } 
+    return "escolha errada";
 }
 
-String papel({required pl2}) {
-  if (pl2 == "papel") {
+String papel({required op1}) {
+  if (op1 == "papel") {
     return "empate";
-  } else if (pl2 == "tesoura") {
+  }
+  if (op1 == "tesoura") {
     return "tesoura";
-  } else {
+  }
+  if (op1 == "pedra") {
     return "papel";
   }
+    return "escolha errada";
 }
 
-String tesoura({required pl2}) {
-  if (pl2 == "papel") {
+String tesoura({required op1}) {
+  if (op1 == "papel") {
     return "tesoura";
-  } else if (pl2 == "tesoura") {
+  }
+  if (op1 == "tesoura") {
     return "empate";
-  } else {
+  }
+  if (op1 == "pedra") {
     return "pedra";
   }
+  return "escolha errada";
 }
 
-String resultado({required String p1, required String p2}) {
-  switch (p1) {
+String gameplay({required String escolha1, required String escolha2}) {
+  switch (escolha2) {
     case "pedra":
-      return pedra(pl2: p2);
-
+      return pedra(op1: escolha1);
     case "papel":
-      return papel(pl2: p2);
-
+      return papel(op1: escolha1);
     case "tesoura":
-      return tesoura(pl2: p2);
-    
+      return tesoura(op1: escolha1);
     default:
-      return "erro";
+      return "tente novamente";
   }
+}
+
+void choices() {
+  print("------------registe o jogador 1------------");
+  Player1 play1 = Player1(
+    nome: input(mensagem: "nome do jogador").toLowerCase(),
+    escolha: input(mensagem: "pedra, papel ou tesoura").toLowerCase(),
+  );
+  print("-------------------------------------------");
+
+  print("-----------registe o jogador 2-------------");
+  Player2 play2 = Player2(
+    nome: input(mensagem: "nome do jogador").toLowerCase(),
+    escolha: input(mensagem: "pedra,papel ou tesoura").toLowerCase(),
+  );
+  print("------------------------------------------");
+
+  print("---------resultado-------------------------");
+  print(gameplay(escolha1: play1.escolha, escolha2: play2.escolha));
 }
