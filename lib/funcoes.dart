@@ -9,93 +9,68 @@ String input({required mensagem}) {
   return input;
 }
 
-class Player1 {
-  String nome;
-  String escolha;
+class Gameplay {
+  String player1;
+  String player2;
 
-  Player1({required this.nome, required this.escolha});
+  Gameplay({required this.player1, required this.player2});
 
-  String verificar() {
-    if (escolha == "pedra" || escolha == "papel" || escolha == "tesoura") {
-      return escolha;
+  void pedra() {
+    if (player1 == "papel") {
+      print("$player1 + $player2 = papel");
+    }
+    if (player1 == "tesoura") {
+      print("$player1 + $player2 = pedra");
+    }
+    if (player1 == "pedra") {
+      print("$player1 + $player2 = empate");
     } else {
-      return "não entendi";
+      print("escolha errada");
     }
   }
-}
 
-class Player2 extends Player1 {
-  Player2({required nome, required escolha})
-      : super(nome: nome, escolha: escolha);
-}
+  void papel() {
+    if (player1 == "papel") {
+      print("$player1 + $player2 = empate");
+    }
+    if (player1 == "tesoura") {
+      print("$player1 + $player2 = tesoura");
+    }
+    if (player1 == "pedra") {
+      print("$player1 + $player2 = papel");
+    } else {
+      print("escolha errada");
+    }
+  }
 
-String pedra({required op1}) {
-  if (op1 == "papel") {
-    return "papel";
+  void tesoura() {
+    if (player1 == "papel") {
+      print("$player1 + $player2  = tesoura");
+    }
+    if (player1 == "tesoura") {
+      print("$player1 + $player2 = empate");
+    }
+    if (player1 == "pedra") {
+      print("$player1 + $player2 = pedra");
+    } else {
+      print("escolha errada");
+    }
   }
-  if (op1 == "tesoura") {
-    return "pedra";
-  }
-  if (op1 == "pedra") {
-    return "empate";
-  } 
-    return "escolha errada";
-}
 
-String papel({required op1}) {
-  if (op1 == "papel") {
-    return "empate";
+  void check() {
+    switch (player2) {
+      case "pedra":
+        pedra();
+        break;
+      case "papel":
+        papel();
+        break;
+      case "tesoura":
+        tesoura();
+        break;
+      default:
+        print("tente novamente");
+        break;
+    }
   }
-  if (op1 == "tesoura") {
-    return "tesoura";
-  }
-  if (op1 == "pedra") {
-    return "papel";
-  }
-    return "escolha errada";
-}
-
-String tesoura({required op1}) {
-  if (op1 == "papel") {
-    return "tesoura";
-  }
-  if (op1 == "tesoura") {
-    return "empate";
-  }
-  if (op1 == "pedra") {
-    return "pedra";
-  }
-  return "escolha errada";
-}
-
-String gameplay({required String escolha1, required String escolha2}) {
-  switch (escolha2) {
-    case "pedra":
-      return pedra(op1: escolha1);
-    case "papel":
-      return papel(op1: escolha1);
-    case "tesoura":
-      return tesoura(op1: escolha1);
-    default:
-      return "tente novamente";
-  }
-}
-
-void choices() {
-  print("------------registe o jogador 1------------");
-  Player1 play1 = Player1(
-    nome: input(mensagem: "nome do jogador").toLowerCase(),
-    escolha: input(mensagem: "pedra, papel ou tesoura").toLowerCase(),
-  );
-  print("-------------------------------------------");
-
-  print("-----------registe o jogador 2-------------");
-  Player2 play2 = Player2(
-    nome: input(mensagem: "nome do jogador").toLowerCase(),
-    escolha: input(mensagem: "pedra,papel ou tesoura").toLowerCase(),
-  );
-  print("------------------------------------------");
-
-  print("---------resultado-------------------------");
-  print(gameplay(escolha1: play1.escolha, escolha2: play2.escolha));
 }
