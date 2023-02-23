@@ -15,58 +15,56 @@ class Gameplay {
 
   Gameplay({required this.player1, required this.player2});
 
-  void pedra() {
-    if (player1 == "papel") {
-      print("$player1 + $player2 = papel");
-    }
-    if (player1 == "tesoura") {
-      print("$player1 + $player2 = pedra");
-    }
-    if (player1 == "pedra") {
-      print("$player1 + $player2 = empate");
-    } else {
-      print("escolha errada");
-    }
-  }
-
-  void papel() {
-    if (player1 == "papel") {
-      print("$player1 + $player2 = empate");
-    }
-    if (player1 == "tesoura") {
-      print("$player1 + $player2 = tesoura");
-    }
-    if (player1 == "pedra") {
-      print("$player1 + $player2 = papel");
-    } else {
-      print("escolha errada");
-    }
-  }
-
-  void tesoura() {
-    if (player1 == "papel") {
-      print("$player1 + $player2  = tesoura");
-    }
-    if (player1 == "tesoura") {
-      print("$player1 + $player2 = empate");
-    }
-    if (player1 == "pedra") {
-      print("$player1 + $player2 = pedra");
-    } else {
-      print("escolha errada");
-    }
-  }
 
   void check() {
-    switch (player2) {
+    switch (player1) {
       case "pedra":
-        pedra();
+        switch (player2) {
+          case "pedra":
+            print("empate");
+            break;
+          case "papel":
+            print("papel ganha");
+            break;
+          case "tesoura":
+            print("pedra ganha");
+            break;
+          default:
+            print("não entendi");
+            break;
+        }
         break;
       case "papel":
-        papel();
+        switch (player2) {
+          case "pedra":
+            print("papel ganha");
+            break;
+          case "papel":
+            print("empate");
+            break;
+          case "tesoura":
+            print("tesoura ganha");
+            break;
+          default:
+            print("não entendi");
+            break;
+        }
         break;
       case "tesoura":
-        tesoura();
+        switch (player2) {
+          case "pedra":
+            print("pedra ganha");
+            break;
+          case "papel":
+            print("tesoura ganha");
+            break;
+          case "tesoura":
+            print("empate");
+            break;
+          default:
+            print("não entendi");
+            break;
+        }
         break;
       default:
         print("tente novamente");
